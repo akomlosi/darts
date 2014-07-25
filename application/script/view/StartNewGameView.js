@@ -10,29 +10,57 @@ define([
 ], function($, _, Backbone, StartNewGameModel, startNewGameTemplate) {
     var StartNewGameView = Backbone.View.extend({
 
-        initialize: function()
-        {
+        name: 'StartNewGameView',
+
+        /**
+         * @constructor
+         */
+        initialize: function() {
             console.log('StartNewGameView.init done.');
         },
 
+        /**
+         * Main element
+         */
         el: $('#container'),
 
+        /**
+         * Events
+         */
         events: {
-            'click a' : 'onStartNewGameClick'
+            'click .start_new_game_button' : 'onStartNewGameButtonClick'
         },
 
+        /**
+         * Model layer instance
+         */
         model : StartNewGameModel,
 
-        render: function()
-        {
+        /**
+         * Renders the new game template
+         *
+         * @method render
+         * @public
+         *
+         * @return void
+         */
+        render: function() {
             var data = {};
             var compiledTemplate = _.template( startNewGameTemplate, data );
             this.$el.append( compiledTemplate );
         },
 
-        onStartNewGameClick: function(ev)
-        {
+        /**
+         * Handles a click event on a start new game button.
+         *
+         * @method onStartNewGameButtonClick
+         * @param {String} ev   Event object
+         * @return void
+         */
+        onStartNewGameButtonClick: function(ev) {
             ev.preventDefault();
+            this.render();
+            this.trigger('start-new-game-view-render-done', [this, this.name]);
         }
     });
     return StartNewGameView;

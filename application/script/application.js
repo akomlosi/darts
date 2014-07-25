@@ -4,12 +4,12 @@ define([
     'underscore',
     'backbone',
     'router',
-    'view/StartNewGameView'
-], function($, _, Backbone, Router, StartNewGameView) {
+    'collection/MainMenuCollection'
+], function($, _, Backbone, Router, MainMenuCollection) {
     var initialize = function() {
         console.log('application.init done.');
         Router.initialize();
-        var _startNewGameView = new StartNewGameView;
+        var _mainMenuCollection = new MainMenuCollection;
     }
 
     return {
