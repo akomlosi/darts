@@ -1,16 +1,22 @@
 // Filename: application.js
+
 define([
     'jquery',
     'underscore',
     'backbone',
     'router',
-    'collection/MainMenuCollection'
-], function($, _, Backbone, Router, MainMenuCollection) {
+    'layout/Layout'
+], function($, _, Backbone, Router, Layout) {
     var initialize = function() {
-        console.log('application.init done.');
+
+        // Setting the main namespace
+        Chronos.namespace('Darts');
+
         Router.initialize();
-        var _mainMenuCollection = new MainMenuCollection;
-    }
+
+        Darts.Layout = new Layout;
+        console.log('Application.init done.');
+    };
 
     return {
         initialize: initialize

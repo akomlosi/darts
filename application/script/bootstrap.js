@@ -4,17 +4,14 @@ require.config({
         jquery     : 'libs/jquery/jquery',
         underscore : 'libs/underscore/underscore',
         backbone   : 'libs/backbone/backbone'
-//    },
-//    shim: {
-//        'backbone': {
-//            deps: ['jquery','underscore'],
-//            exports: 'Backbone'
-//        }
     }
 });
 
 require([
-    'application',
-], function(Application) {
+    'jquery',
+    'underscore',
+    'backbone',
+    'application'
+], function($, _, Backbone, Application) {
     Application.initialize();
 });

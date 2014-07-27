@@ -1,34 +1,34 @@
 // Filename: view/game/NewGameView
+
+Backbone.namespace('Darts.View');
+
 define([
     'jquery',
     'underscore',
     'backbone',
-    '../model/StartNewGameModel',
-    // primary template for this view
-    'text! /../../templates/game/startnewgame.html'
+    '../model/StartNewGameModel'
+//    // primary template for this view
+//    'text! /../../templates/game/startnewgame.html'
 
-], function($, _, Backbone, StartNewGameModel, startNewGameTemplate) {
-    var StartNewGameView = Backbone.View.extend({
+], function($, _, Backbone, StartNewGameModel) {
+    Darts.View.StartNewGameView = Darts.View.extend({
 
         name: 'StartNewGameView',
 
         /**
          * @constructor
          */
-        initialize: function() {
+        initialize: function(el) {
+            Darts.View.prototype.initialize.call(this, el);
             console.log('StartNewGameView.init done.');
         },
-
-        /**
-         * Main element
-         */
-        el: $('#container'),
 
         /**
          * Events
          */
         events: {
-            'click .start_new_game_button' : 'onStartNewGameButtonClick'
+            'click .start_new_game_button'   : 'onStartNewGameButtonClick',
+            'click .select_game_type_button' : 'onSelectGameTypeButtonClick'
         },
 
         /**
@@ -45,9 +45,7 @@ define([
          * @return void
          */
         render: function() {
-            var data = {};
-            var compiledTemplate = _.template( startNewGameTemplate, data );
-            this.$el.append( compiledTemplate );
+            Darts.View.render.call(this, startNewGameTemplate, data);
         },
 
         /**
@@ -59,8 +57,7 @@ define([
          */
         onStartNewGameButtonClick: function(ev) {
             ev.preventDefault();
-            this.render();
-            this.trigger('start-new-game-view-render-done', [this, this.name]);
+            this.trigger('start-new-game-view-render-done', [ev, this, this.name]);
         }
     });
     return StartNewGameView;
